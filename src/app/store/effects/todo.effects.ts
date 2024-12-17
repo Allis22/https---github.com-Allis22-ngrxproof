@@ -26,18 +26,16 @@ export class TodoEffects {
                     const todos = this.localStorageService.getTodos();
                     switch (type) {
                         case '[TODO] Add Todo':
-                            //todos.push(rest['todo']);
+                            todos.push(rest['todo']);
                             break;
                         case '[TODO] Update Todo':
-
-                            //const index = todos.findIndex(t => t.id === rest['todo'].id);
-                            // if (index > -1) todos[index] = rest['todo'];
+                            const index = todos.findIndex(t => t.id === rest['todo'].id);
+                            if (index > -1) todos[index] = rest['todo'];
                             break;
                         case '[TODO] Delete Todo':
-
-                            //const id = rest['id'];
-                            // const filteredTodos = todos.filter(t => t.id !== id);
-                            //this.localStorageService.saveTodos(filteredTodos);
+                            const id = rest['id'];
+                            const filteredTodos = todos.filter(t => t.id !== id);
+                            this.localStorageService.saveTodos(filteredTodos);
                             return;
                     }
                     this.localStorageService.saveTodos(todos);
